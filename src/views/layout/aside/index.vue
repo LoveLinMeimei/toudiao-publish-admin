@@ -1,15 +1,16 @@
 <template>
   <div class='aside-container'>
-    <h1 class="title">
-      <img src="./favicon.jpg" alt="">
-      头条发布后台
-    </h1>
     <el-menu
       class="el-menu"
       default-active="2"
       background-color="#002033"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      :collapse="isCollapse">
+        <h1 class="title">
+          <img src="./favicon.jpg" alt="">
+          <span :class="[isCollapse ? 'isOpen' : '']">头条发布后台</span>
+        </h1>
         <el-menu-item index="1">
           <i class="iconfont icon-home"></i>
           <span slot="title">首页</span>
@@ -47,8 +48,7 @@ export default {
   name: 'Aside',
   components: {
   },
-  props: {
-  },
+  props: ['is-collapse'],
   data () {
     return {
     }
@@ -69,14 +69,17 @@ export default {
 .aside-container {
   .title {
     background-color: #002033;
-    margin: 0;
-    padding: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
-    text-align: center;
-    line-height: 46px;
+    .isOpen {
+      display: none;
+    }
     img {
       width: 20px;
       height: 20px;
+      margin-right: 5px;
     }
   }
   .el-menu {

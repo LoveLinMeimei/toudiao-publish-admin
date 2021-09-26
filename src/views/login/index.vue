@@ -78,7 +78,7 @@ export default {
       // 开启登录中loading...
       this.loginLoadig = true
       login(this.user).then(res => {
-        console.log(res)
+        // console.log(res)
 
         // 登录成功
         this.$message({
@@ -86,8 +86,16 @@ export default {
           type: 'success'
         })
 
+        // 登录成功以后将用户信息存储到本地存储
+        // 本地存储只能存字符串
+        window.localStorage.setItem('user', JSON.stringify(res.data.data))
+
         // 关闭loading
         this.loginLoadig = false
+
+        this.$router.push({
+          name: 'home'
+        })
       }).catch(err => {
         // 登录失败
         console.log('登录失败' + err)
