@@ -20,7 +20,7 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">个人设置</el-dropdown-item>
-            <el-dropdown-item command="b">登录退出</el-dropdown-item>
+            <el-dropdown-item command="logout">登录退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -44,14 +44,30 @@ export default {
   },
   data () {
     return {
-      // 用户信息
-      user: {},
-      isCollapse: false
+      user: {}, // 用户信息
+      isCollapse: false // 侧边栏折叠
     }
   },
   methods: {
     handleCommand (command) {
-      this.$message('click on item ' + command)
+      if (command === 'logout') {
+        this.$confirm('确定退出登录吗？', '退出提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          window.localStorage.removeItem('user')
+          this.$router.push('/login')
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退出'
+          })
+        })
+      } else {
+        // 个人设置
+        console.log('个人设置')
+      }
     },
     getUserProfile () {
       getUserProfile().then(res => {

@@ -6,16 +6,17 @@
       background-color="#002033"
       text-color="#fff"
       active-text-color="#ffd04b"
-      :collapse="isCollapse">
+      :collapse="isCollapse"
+      router>
         <h1 class="title">
           <img src="./favicon.jpg" alt="">
           <span :class="[isCollapse ? 'isOpen' : '']">头条发布后台</span>
         </h1>
-        <el-menu-item index="1">
+        <el-menu-item index="/">
           <i class="iconfont icon-home"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="/article">
           <i class="iconfont icon-article"></i>
           <span slot="title">内容管理</span>
         </el-menu-item>
