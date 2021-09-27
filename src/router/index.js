@@ -41,8 +41,9 @@ const router = new VueRouter({
   routes
 })
 
-// 导航守卫
+// 路由导航守卫（拦截器）的作用就是控制页面的访问状态
 // 功能：实现非登录页面都需要有登录认证，否则跳转到首页
+// next:放行方法
 router.beforeEach(function (to, from, next) {
   const user = JSON.parse(window.localStorage.getItem('user'))
   if (to.path === '/login') {
