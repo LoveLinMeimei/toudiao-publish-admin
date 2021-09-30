@@ -43,7 +43,7 @@
 
     <el-card class="list-cart">
       <div slot="header" class="clearfix">
-        根据筛选条件共查询到 {{ this.totalCount }} 条结果:
+        根据筛选条件共查询到 {{ totalCount }} 条结果:
       </div>
       <el-table
         size="mini"
@@ -86,7 +86,8 @@
               size="mini"
               type="primary"
               circle
-              class="el-icon-edit">
+              class="el-icon-edit"
+              @click="editArticle(scope.row.id)">
             </el-button>
             <el-button
               size="mini"
@@ -163,7 +164,7 @@ export default {
         }
       ],
       status: null, // 状态
-      totalCount: 1, // 总条数
+      totalCount: 0, // 总条数
       pageSize: 10, // 每页的大小
       channels: [], // 文章频道列表数据
       channelId: null, // 查询文章的频道
@@ -185,7 +186,7 @@ export default {
           per_page: this.pageSize,
           channel_id: this.channelId,
           begin_pubdate: this.dateRange ? this.dateRange[0] : null,
-          end_pubdate: this.dateRange ? this.dateRange[0] : null
+          end_pubdate: this.dateRange ? this.dateRange[1] : null
         }
       ).then(res => {
         const { results, total_count: totalCount } = res.data.data
@@ -227,19 +228,20 @@ export default {
       })
     },
 
+    // 编辑文章
+    editArticle (articleId) {
+      this.$router.push('/publish?id=' + articleId)
+    },
+
     // 页面改变
     changePage (page) {
       this.loadArticleList(page)
-    },
-
-    onSubmit () {
-      console.log('submit!')
     }
   },
   computed: {
   },
   created () {
-    this.loadArticleList()
+    this.loadArticleList(1)
     this.loadArticleChannels()
   },
   mounted () {

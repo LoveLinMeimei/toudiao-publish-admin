@@ -24,7 +24,7 @@
           <i class="iconfont icon-img"></i>
           <span slot="title">素材管理</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="/publish">
           <i class="iconfont icon-ic-published"></i>
           <span slot="title">发布文章</span>
         </el-menu-item>
@@ -78,13 +78,15 @@ export default {
       display: none;
     }
     img {
-      width: 20px;
+      width: 40px;
       height: 20px;
       margin-right: 5px;
     }
   }
   .el-menu {
     height: 100%;
+    width: 100%;
+    padding: 0 20px 0 0;
     .iconfont {
       margin-right: 5px;
     }
