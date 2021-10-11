@@ -5,6 +5,10 @@ import Login from '@/views/login/index.vue'
 import Home from '@/views/home/index.vue'
 import Article from '@/views/article/index.vue'
 import Publish from '@/views/publish/index.vue'
+import Image from '@/views/image/index.vue'
+import Comment from '@/views/comment/index.vue'
+import Settings from '@/views/settings/index.vue'
+import Fans from '@/views/fans/index.vue'
 import LayOut from '@/views/layout/index.vue'
 
 Vue.use(VueRouter)
@@ -38,6 +42,26 @@ const routes = [
         path: '/publish',
         name: 'publish',
         component: Publish
+      },
+      {
+        path: '/image',
+        name: 'image',
+        component: Image
+      },
+      {
+        path: '/comment',
+        name: 'comment',
+        component: Comment
+      },
+      {
+        path: '/settings',
+        name: 'settings',
+        component: Settings
+      },
+      {
+        path: '/fans',
+        name: 'fans',
+        component: Fans
       }
     ]
   }

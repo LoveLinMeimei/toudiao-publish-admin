@@ -30,6 +30,21 @@
             <el-radio :label="0">无图</el-radio>
             <el-radio :label="-1">自动</el-radio>
           </el-radio-group>
+          <template v-if="articleForm.cover.type > 0">
+            <upload-cover
+              :key="cover"
+              v-for="(cover, index) in articleForm.cover.type"
+              v-model="articleForm.cover.images[index]"
+            >
+            </upload-cover>
+            <!-- <upload-cover
+              :key="cover"
+              v-for="(cover, index) in articleForm.cover.type"
+              @update-cover="updateCover(index, $event)"
+              :cover-image="articleForm.cover.images[index]"
+            >
+            </upload-cover> -->
+          </template>
         </el-form-item>
         <el-form-item label="频道" prop="channel_id">
           <el-select v-model="articleForm.channel_id" placeholder="请选择">
@@ -47,6 +62,7 @@
 
 <script>
 import { getArticleChannels, AddpublishArticle, getArticleById, editArticle } from '@/api/article.js'
+import UploadCover from './components/upload-cover.vue'
 import { uploadImage } from '@/api/image.js'
 import {
   ElementTiptap,
@@ -75,22 +91,13 @@ import 'element-tiptap/lib/index.css'
 export default {
   name: 'PublishIndex',
   components: {
-    'el-tiptap': ElementTiptap
+    'el-tiptap': ElementTiptap,
+    UploadCover
   },
   props: {
   },
   data () {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
       channels: [], // 频道
       articleForm: {
         title: '',
@@ -214,6 +221,11 @@ export default {
         this.articleForm = res.data.data
       })
     }
+
+    // 接收子组件数据
+    /* updateCover (index, url) {
+      this.articleForm.cover.images[index] = url
+    } */
   },
   computed: {
   },

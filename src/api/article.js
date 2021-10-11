@@ -60,3 +60,17 @@ export const editArticle = (articleId, data, draft = false) => {
     data
   })
 }
+
+// 修改文章评论状态
+export const changeCommentStatus = (aticleId, boolean) => {
+  return request({
+    method: 'PUT',
+    url: '/mp/v1_0/comments/status',
+    params: {
+      article_id: aticleId
+    },
+    data: {
+      allow_comment: boolean
+    }
+  })
+}

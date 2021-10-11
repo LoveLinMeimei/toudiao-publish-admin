@@ -34,6 +34,7 @@
 <script>
 import Aside from './aside/index.vue'
 import { getUserProfile } from '@/api/user.js'
+import globalBus from '@/utils/global-bus.js'
 
 export default {
   name: 'LayOut',
@@ -79,6 +80,12 @@ export default {
   },
   created () {
     this.getUserProfile()
+    // 通过事件总线接受数据
+    globalBus.$on('userProfileBus', data => {
+      // console.log(data)
+      this.user.photo = data.photo
+      this.user.name = data.name
+    })
   },
   mounted () {
   },
